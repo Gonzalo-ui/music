@@ -106,6 +106,17 @@ app.delete('/songs/:id', (req, res) => {
     );
 });
 
+app.get('/list-uploads', (req, res) => {
+    const uploadDir = path.join(__dirname, 'uploads');
+    
+    fs.readdir(uploadDir, (err, files) => {
+        if (err) {
+            return res.status(500).json({ error: 'No se pueden listar los archivos' });
+        }
+        res.json(files);
+    });
+});
+
 // Servir archivos de la carpeta "uploads"
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
