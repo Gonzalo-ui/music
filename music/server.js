@@ -115,3 +115,17 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.listen(10000, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
 });
+
+const fs = require('fs');
+const path = require('path');
+
+app.get('/list-uploads', (req, res) => {
+    const uploadDir = path.join(__dirname, 'uploads');
+    
+    fs.readdir(uploadDir, (err, files) => {
+        if (err) {
+            return res.status(500).json({ error: 'No se pueden listar los archivos' });
+        }
+        res.json(files);
+    });
+});
