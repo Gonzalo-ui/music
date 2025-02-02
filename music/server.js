@@ -2,11 +2,11 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
-const fs = require('fs'); // Importar fs
+const fs = require('fs'); // Importar el módulo fs para manejar archivos
 const db = require('./database/database'); // Importar la base de datos
 
 const app = express();
-const port = process.env.PORT || 10000;
+const port = 10000; // Puerto que usa Render
 
 // Middleware
 app.use(cors());
@@ -30,28 +30,80 @@ app.post('/upload', upload.single('song'), (req, res) => {
     const { originalname, filename } = req.file;
     const songPath = '/uploads/' + filename;
 
-    db.run(
-        'INSERT INTO songs (name, path) VALUES (?, ?)',
-        [originalname, songPath],
-        function (err) {
+    // Verificar si ya existe una canción con el mismo nombre
+    db.get(
+        'SELECT * FROM songs WHERE name = ?',
+        [originalname],
+        (err, row) => {
             if (err) {
                 return res.status(500).json({ error: err.message });
             }
-            res.json({ id: this.lastID, name: originalname, path: songPath });
+            if (row) {
+                return res.status(400).json({ error: 'Ya existe una canción con este nombre.' });
+            }
+
+            // Si no existe, insertar la canción en la base de datos
+            db.run(
+                'INSERT INTO songs (name, path) VALUES (?, ?)',
+                [originalname, songPath],
+                function (err) {
+                    if (err) {
+                        return res.status(500).json({ error: err.message });
+                    }
+                    res.json({ id: this.lastID, name: originalname, path: songPath });
+                }
+            );
         }
     );
 });
 
-// Nueva ruta para listar los archivos subidos
-app.get('/list-uploads', (req, res) => {
-    const uploadDir = path.join(__dirname, 'uploads');
-    
-    fs.readdir(uploadDir, (err, files) => {
+// Ruta para obtener todas las canciones
+app.get('/songs', (req, res) => {
+    db.all('SELECT * FROM songs', (err, rows) => {
         if (err) {
-            return res.status(500).json({ error: 'No se pueden listar los archivos' });
+            return res.status(500).json({ error: err.message });
         }
-        res.json(files);
+        res.json(rows);
     });
+});
+
+// Ruta para eliminar una canción
+app.delete('/songs/:id', (req, res) => {
+    const songId = req.params.id;
+
+    // Obtener la información de la canción antes de eliminarla
+    db.get(
+        'SELECT * FROM songs WHERE id = ?',
+        [songId],
+        (err, row) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            if (!row) {
+                return res.status(404).json({ error: 'Canción no encontrada.' });
+            }
+
+            // Eliminar el archivo de la carpeta "uploads"
+            const filePath = path.join(__dirname, row.path);
+            fs.unlink(filePath, (err) => {
+                if (err) {
+                    return res.status(500).json({ error: 'Error al eliminar el archivo.' });
+                }
+
+                // Eliminar la canción de la base de datos
+                db.run(
+                    'DELETE FROM songs WHERE id = ?',
+                    [songId],
+                    function (err) {
+                        if (err) {
+                            return res.status(500).json({ error: err.message });
+                        }
+                        res.json({ message: 'Canción eliminada correctamente.' });
+                    }
+                );
+            });
+        }
+    );
 });
 
 // Servir archivos de la carpeta "uploads"
@@ -61,4 +113,3 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
 });
-
