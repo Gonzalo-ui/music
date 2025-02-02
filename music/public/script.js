@@ -45,7 +45,7 @@ async function deleteSong(songId) {
         loadSongs(); // Recargar la lista de canciones
     } catch (error) {
         console.error('Error:', error);
-        alert('No se pudo eliminar la canción. Inténtalo de nuevo.');
+        alert('No se pudo eliminar la canción, probablemente sea porque está bugueadisimo asi que no te ralles e inténtalo de nuevo.');
     }
 }
 
@@ -69,7 +69,7 @@ document.getElementById('uploadForm').addEventListener('submit', async (e) => {
         loadSongs(); // Recargar la lista de canciones
     } catch (error) {
         console.error('Error:', error);
-        alert('No se pudo subir la canción. Inténtalo de nuevo.');
+        alert('No se pudo subir la canción,seguramente esté petao asi que inténtalo de nuevo más tarde rey.');
     }
 });
 
