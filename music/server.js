@@ -112,6 +112,6 @@ app.delete('/songs/:id', (req, res) => {
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Iniciar el servidor
-app.listen(port, () => {
+app.listen(10000, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
 });
