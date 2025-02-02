@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reproductor de Música</title>
+    <title>Reproductor de Música Online</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Music Server Online</h1>
+        <h1>Music Server</h1>
+      <p>No subir más de 300MB de canciones porfa.<br>Para actualizar la lista, pulsar F5.</p>
         <form id="uploadForm" enctype="multipart/form-data">
             <input type="file" name="song" accept=".mp3" required>
             <button type="submit">Subir canción</button>
         </form>
+      <p class="a"><b>Lista de canciones cargadas en el Servidor:</b></p>
         <ul id="songList"></ul>
         <audio id="audioPlayer" controls></audio>
     </div>
