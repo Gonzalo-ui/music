@@ -11,7 +11,8 @@ const db = new sqlite3.Database('./database/music.db', (err) => {
             CREATE TABLE IF NOT EXISTS songs (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
-                path TEXT NOT NULL
+                path TEXT NOT NULL,
+                username TEXT NOT NULL
             )
         `);
     }
