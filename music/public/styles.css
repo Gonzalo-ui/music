@@ -1,0 +1,177 @@
+body {
+    font-family: 'arial', sans-serif;
+    background-color: #89c8fc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin: 0;
+    font-size: 2.5rem;
+    padding-top: 1;
+}
+
+p {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 1px;
+}
+
+p.abajoder{
+    text-align: right;
+    margin-left: 96%;
+    margin-top: auto;
+}
+.a {
+    text-align-last: center;
+}
+
+/* Contenedor principal */
+.container {
+    
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 50px;
+}
+
+/* Formulario de subida */
+#uploadForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+ul {
+color: white;
+
+}
+/* Caja de entrada del nombre de usuario */
+#uploadForm input[type="password"] {
+    padding: 15px;
+    border: 4px solid #60b8ff;
+    border-radius: 15px;
+    background-color: #ecf0f1;
+    font-size: 1rem;
+    color: #0a65a0;
+    transition: all 0.3s ease;
+}
+
+#uploadForm input[type="text"]:focus {
+    border-color: #2980b9;
+    outline: none;
+    box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+}
+
+/* Caja de entrada del archivo de la canción */
+#uploadForm input[type="file"] {
+    padding: 15px;
+    border: 4px solid #60b8ff;
+    border-radius: 15px;
+    background-color: #ecf0f1;
+    cursor: pointer;
+}
+
+#uploadForm input[type="file"]:hover {
+    background-color: #dfe6e9;
+}
+
+#uploadForm button {
+    padding: 10px;
+    background-color: #60b8ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+#uploadForm button:hover {
+    background-color: #0A65A0;
+}
+
+/* Lista de canciones */
+#songList {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+}
+
+#songList li {
+    background-color: #60b8ff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+#songList li:hover {
+    background-color: #0A65A0;
+}
+
+#songList li button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+#songList li button:hover {
+    background-color: #c0392b;
+}
+
+/* Reproductor de audio */
+#audioPlayer {
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: #ecf0f1;
+    padding: 1px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Mensajes de error o éxito */
+.alert {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.alert.success {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.alert.error {
+    background-color: #e74c3c;
+    color: white;
+}
