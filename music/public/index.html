@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor de Música Online</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Trulli" width="256" height="176,5">
+        <h1>Music Cloud</h1>
+        <p><b>By Gonzalo S.R</b></p>
+
+        <!-- Contenedor para mostrar mensajes de éxito o error -->
+        <div id="messageBox" class="alert" style="display: none;"></div>
+
+        <!-- Formulario para subir canciones -->
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="text" name="username" placeholder="Usuario" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <input type="file" name="song" accept=".mp3" required>
+            <button type="submit">Subir⬆️☁️</button>
+        </form>
+
+        <!-- Lista de canciones -->
+        <p class="a"><b><u>Lista de canciones cargadas en el Servidor:</u></b></p>
+        <ul id="songList"></ul>
+
+        <!-- Reproductor de audio -->
+        <audio id="audioPlayer" controls></audio>
+    </div>
+
+    <!-- Caja de confirmación para eliminar una canción -->
+    <div id="confirmationBox" style="display:none;">
+        <div>
+            <p id="confirmationMessage"></p>
+            <button id="confirmDeleteButton">Sí, eliminar</button>
+            <button id="cancelDeleteButton">Cancelar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <p class="abajoder">Ver 0.4</p>
+</body>
+</html>
+
